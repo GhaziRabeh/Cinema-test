@@ -1,0 +1,33 @@
+
+<div id="viewerBox" class="lg:p-10 md:p-6 p-4 bg-white dark:bg-gray-900">
+  
+  <div class="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-strech justify-center lg:space-x-8">
+    <div class="w-[400px] flex justify-between  bg-gray-50  ">
+  
+      <div class="slider">
+        <div class="slide-ana lg:relative">
+          <div class="flex" >
+            <img [src]="root_movies_uri + movie.image" class="w-[400px] object-fill
+             group-hover:opacity-80" />
+          </div>
+      
+        </div>
+      </div>
+    
+    </div>
+    <div class="lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
+      <h1 class="text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-white">{{movie.name}}</h1>
+      <p class="text-base leading-normal text-gray-600 dark:text-white mt-2">{{movie.description}}</p>
+      
+     <div class="flex gap-4 pt-4 ">
+      <button class="bg-red-600 text-white px-6 py-2 rounded-md text-lg font-semibold">Watch Now</button>
+      <button class="border  border-red-600 bg-white-600 text-red-600 px-6 py-2 rounded-md text-lg font-semibold">Download</button>
+     </div>
+       
+    
+   
+    </div>
+  </div>
+</div>
+
+

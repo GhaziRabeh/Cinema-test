@@ -1,0 +1,51 @@
+    
+      <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+        <form class="space-y-4" (ngSubmit)="updateShowTv()">
+          <div *ngIf="showtv.image">
+            <img 
+              [src]="root_show_uri + showtv.image"
+              alt="Old Image"
+              class="w-20 h-20 object-cover" />
+          </div>
+          <select class="w-full p-3 border border-gray-300 rounded 
+          focus:outline-none focus:ring-2 focus:ring-blue-500" 
+          [(ngModel)]="showtv.category_id" name="category_id">
+        <option disabled selected>Select a category</option>
+        <option *ngFor="let cate of categories" 
+        [value]="cate.id">{{ cate.title }}</option>
+      </select>
+      
+        
+          <input [(ngModel)]="showtv.name" name="name" 
+           class="w-full p-2 border border-gray-300 
+          rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      
+         
+          <div>
+            <textarea [(ngModel)]="showtv.description" 
+            name="description" placeholder="Description" 
+           class="w-full p-2 border
+            border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+      
+          
+          <input [(ngModel)]="showtv.rate" name="rate" 
+          placeholder="Rate" 
+          class="w-full p-2 border
+           border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      
+          
+          <div>
+            <input type="file" (change)="onFileChange($event)" 
+            [(ngModel)]="showtv.image" 
+            name="image" class="w-full p-2 border
+             border-gray-300 rounded focus:outline-none
+              focus:ring-2 focus:ring-blue-500" />
+          </div>
+      
+          <!-- Submit button -->
+          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+            Save
+          </button>
+        </form>
+      </div>

@@ -1,0 +1,42 @@
+<h2 class="text-2xl font-semibold mb-4">Edit Show</h2>
+
+<!-- Show Form -->
+<div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+  <form (ngSubmit)="updateShow()" class="space-y-4" enctype="multipart/form-data">
+    <div *ngIf="show.image">
+      <img 
+        [src]="root_media_uri + show.image"
+        alt="Old Image"
+        class="w-20 h-20 object-cover" />
+    </div>
+    
+    <div>
+      <input
+        [(ngModel)]="show.title"
+        name="title"
+        placeholder="Title"
+        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div>
+      <input
+        (change)="onFileChange($event)"
+        type="file"
+        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div>
+      <textarea
+        [(ngModel)]="show.description"
+        name="description"
+        placeholder="Description"
+        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+
+    <button (click)="updateShow()"
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      Save
+    </button>
+  </form>
+</div>

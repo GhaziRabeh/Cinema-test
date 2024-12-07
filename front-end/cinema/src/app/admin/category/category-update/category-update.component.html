@@ -1,0 +1,29 @@
+<div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+    <form  class="space-y-4">
+      <div>
+        <input
+         [(ngModel)]="category.title"
+          name="title"
+          placeholder="Title"
+          required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <textarea
+          [(ngModel)]="category.description"
+          name="description"
+          placeholder="Description"
+          required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <button (click)="updateCategory()"
+        type="submit"
+        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+        Save
+      </button>
+    </form>
+  </div>

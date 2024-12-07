@@ -1,0 +1,134 @@
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button -->
+        <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white" (click)="toggleMenu()">
+          <!-- Icon when menu is closed -->
+          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <!-- Icon when menu is open -->
+          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex shrink-0 items-center">
+          <a class="text-white font-bold">Film Heaven</a>
+        </div>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a href="/home" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+
+            <!-- Movies Dropdown -->
+            <div class="relative">
+              <button (click)="toggleDropdown()" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                Movies
+              </button>
+              <div *ngIf="dropdownOpenMovies" class="absolute mt-2 w-48 bg-gray-800 rounded-md z-20">
+                <a *ngFor="let categ of Category" [routerLink]="['/category', categ.id, 'movies']" class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                  {{ categ.title }}
+                </a>
+              </div>
+            </div>
+
+            <!-- ShowTv Dropdown -->
+            <div class="relative">
+              <button (click)="toggleDropdownShow()" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                Show Tv
+              </button>
+              <div *ngIf="dropdownOpenShow" class="absolute mt-2 w-48 bg-gray-800 rounded-md z-20">
+                <a *ngFor="let categ of Category" [routerLink]="['/category', categ.id, 'showstv']" class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                  {{ categ.title }}
+                </a>
+              </div>
+            </div>
+
+            <!-- Search Input in Navbar -->
+            <div class="relative">
+              <form>
+                <input type="text" placeholder="Search ..." class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600" />
+                <button type="submit" class="bg-gray-700 text-white rounded-r-md px-4 py-2 mx-4 hover:bg-gray-600">Search</button>
+              </form>
+            </div>
+
+            <!-- Login and Register Links -->
+            <div *ngIf="!userservice.isLoggedIn()" class="flex space-x-4 items-center justify-center">
+              <a href="/login" class="text-white">Login</a>
+              <a href="/register" class="text-white">Register</a>
+            </div>
+
+            <div *ngIf="userservice.isLoggedIn()" class="flex space-x-4 items-center justify-center">
+              <button (click)="userservice.logout(router)" class="text-white">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="sm:hidden" id="mobile-menu" [ngClass]="{ 'block': menuOpen, 'hidden': !menuOpen }">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+      <a href="/home" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+
+      <!-- Movies Mobile Dropdown -->
+      <div class="relative">
+        <a (click)="toggleDropdown()" class="block w-full rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+          Movies
+        </a>
+        <div *ngIf="dropdownOpenMovies" class="absolute mt-2 w-full bg-gray-800 rounded-md z-20">
+          <a  *ngFor="let categ of Category" [routerLink]="['/category', categ.id, 'movies']"
+           class="block px-4 py-2 text-gray-300 hover:bg-gray-700">{{categ.title}}</a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <a (click)="toggleDropdown()" class="block w-full rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+          Show Tv
+        </a>
+        <div *ngIf="dropdownOpenMovies" class="absolute mt-2 w-full bg-gray-800 rounded-md z-20">
+          <a *ngFor="let categ of Category" [routerLink]="['/category', categ.id, 'tvshows']" 
+          class="block px-4 py-2 text-gray-300 hover:bg-gray-700">{{categ.title}}</a>
+        </div>
+      </div>
+
+      <!-- Search Input in Mobile -->
+      <div class="relative mt-2">
+        <form (submit)="onSearchSubmit($event)">
+          <input (input)="getMovieSearch($event)"
+          type="text" placeholder="Search ..." class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600" />
+          <button type="submit" class="bg-gray-700 text-white rounded-r-md px-4 py-2 mx-4 hover:bg-gray-600">Search</button>
+        </form>
+      </div>
+
+      <!-- Mobile Login and Register Links -->
+      <div class="space-y-2 mt-4 items-center justify-center">
+        <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+        <a href="/register" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-gray-800 text-white py-8">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <a href="#" class="text-lg font-bold">Film Heaven</a>
+      </div>
+      <div class="flex space-x-4">
+        <a href="#" class="text-sm text-gray-300 hover:text-white">Privacy Policy</a>
+        <a href="#" class="text-sm text-gray-300 hover:text-white">Terms of Service</a>
+        <a href="#" class="text-sm text-gray-300 hover:text-white">About Us</a>
+        <a href="#" class="text-sm text-gray-300 hover:text-white">Contact</a>
+      </div>
+    </div>
+    <div class="mt-4 border-t border-gray-700 pt-4 text-center text-sm">
+      <p>&copy; 2024 Film Heaven. All rights reserved.</p>
+   

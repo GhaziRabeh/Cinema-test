@@ -1,0 +1,115 @@
+<div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-800 text-white h-screen p-4">
+      <h2 class="text-xl font-semibold mb-6">Admin Dashboard</h2>
+      <ul class="space-y-4">
+        <li>
+          <a href="/admin/dashboard" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="/admin/categories" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            Categories
+          </a>
+        </li>
+        <li>
+          <a href="/admin/movie" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            Movies
+          </a>
+        </li>
+        <li>
+          <a href="/admin/showtv" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            Show Tv
+          </a>
+        </li>
+      </ul>
+    </aside>
+  
+    
+    <div class="flex-1 p-6">
+      <h2 class="text-2xl font-semibold mb-4">List of movies</h2>
+  
+     
+      <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+        <form (ngSubmit)="onSaveshowsTv()" class="space-y-4" >
+         
+          <select 
+          class="w-full p-3 border border-gray-300 rounded 
+            focus:outline-none focus:ring-2 focus:ring-blue-500" 
+          [(ngModel)]="showTv.category_id" 
+          name="category_id" 
+          required>
+          <option value="" disabled>Select a category</option>
+          <option *ngFor="let cate of categories" [value]="cate.id">{{ cate.title }}</option>
+        </select>
+      
+        
+          <input [(ngModel)]="showTv.name" name="name" 
+          required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      
+         
+          <div>
+            <textarea [(ngModel)]="showTv.description" name="description" placeholder="Description" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+      
+          
+          <input [(ngModel)]="showTv.rate" name="rate" placeholder="Rate" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      
+          
+          <div>
+            <input type="file" (change)="onFileChange($event)" 
+            [(ngModel)]="showTv.image" 
+            name="image" class="w-full p-2 border
+             border-gray-300 rounded focus:outline-none
+              focus:ring-2 focus:ring-blue-500" />
+          </div>
+      
+          <!-- Submit button -->
+          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+            Save
+          </button>
+        </form>
+      </div>
+      
+  
+      <!-- Show List -->
+      <table class="table-auto border-collapse border border-gray-300 w-full text-left shadow-lg">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="border border-gray-300 px-4 py-2">#</th>
+            <th class="border border-gray-300 px-4 py-2">Title</th>
+            <th class="border border-gray-300 px-4 py-2">Description</th>
+            <th class="border border-gray-300 px-4 py-2">rate</th>
+            <th class="border border-gray-300 px-4 py-2">Image</th>
+    
+            <th class="border border-gray-300 px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sTv of showsTv">
+            <td class="border border-gray-300 px-4 py-2">{{sTv.id}}</td>
+            <td class="border border-gray-300 px-4 py-2">{{sTv.name}}</td>
+            <td class="border border-gray-300 px-4 py-2">{{sTv.description}}</td>
+            <td class="border border-gray-300 px-4 py-2">{{sTv.rate}}</td>
+            <td class="border border-gray-300 px-4 py-2">
+              <img [src]="root_showTv_uri + sTv.image" alt=""  class="w-16 h-16 object-cover">
+            </td>
+         
+            <td class="border border-gray-300 px-4 py-2">
+              <button (click)="update(sTv)"
+               class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded">
+                Update
+              </button>
+              <button (click)="deleteshowsTv(sTv.id)"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded my-3">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+

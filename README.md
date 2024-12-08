@@ -23,7 +23,7 @@ This is a mini project for a web application designed to manage movies, develope
 
 ### Frontend
 - **Framework**: [Angular](https://angular.io/)
-- **Styling**: Tailwind CSS, Bootstrap
+- **Styling**: Tailwind CSS
 
 ### Backend
 - **Framework**: [Laravel](https://laravel.com/)
@@ -42,8 +42,4 @@ This is a mini project for a web application designed to manage movies, develope
 
 ---
 
-### Frontend Setup
 
-1. Navigate to the `frontend` directory.
-   ```bash
-   cd frontend

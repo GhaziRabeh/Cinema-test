@@ -10,12 +10,12 @@ This is a mini project for a web application designed to manage movies, develope
 - Browse and search for movies.
 - View movie details.
 - Register and log in to access features.
-- Add reviews and ratings to movies.
+
 
 ### Admin Features
 - Manage movie listings (CRUD operations).
-- View and manage user reviews.
-- Monitor user activity and block users if necessary.
+
+
 
 ---
 
